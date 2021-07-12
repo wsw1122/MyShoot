@@ -8,16 +8,13 @@ package cn.tedu.shoot;
 
 import javax.swing.*;
 
-public class Bigplane extends FlyingObject{
-    private double speed;
+public class Bigplane extends Plane{
 
     public Bigplane(double width, double height, double x, double y, double speed) {
         super(width,height,x,y);
         this.speed = speed;
-        image = new ImageIcon("images/bigairplane0.png");
-
-    }
-    public void move() {
-        y+=speed;
+        image = Images.bigairplane[0];
+        width = image.getIconWidth();
+        height = image.getIconHeight();
     }
 }

@@ -8,17 +8,14 @@ package cn.tedu.shoot;
 
 import javax.swing.*;
 
-public class Airplane extends FlyingObject {
-    private double speed;
+public class Airplane extends Plane {
 
     public Airplane(double width, double height, double x, double y, double speed) {
         super(width, height, x, y);
         this.speed = speed;
-        image = new ImageIcon("images/airplane0.png");
-    }
-
-    public void move() {
-        y+=speed;
+        image = Images.airplane[1];
+        width = image.getIconWidth();
+        height = image.getIconHeight();
     }
 
 }

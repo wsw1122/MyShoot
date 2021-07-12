@@ -13,21 +13,22 @@ import java.util.TimerTask;
 public class World extends JPanel{
     private Sky s;
     private Hero h;
-    private Airplane[] as = new Airplane[2];
-    private Bigplane[] bas = new Bigplane[2];
-    private Bee[] bs = new Bee[2];
+    //利用数组管理能打掉的飞机类
+    private FlyingObject[] planes;
     private Bullet[] bts = new Bullet[2];
     public World(){
         s =new Sky(400,700,0,0,1,-700);
         h = new Hero(65,50,140,400,0);
-        as[0] = new Airplane(45,45,10,30,2);
-        as[1] = new Airplane(45,45,300,30,2);
-        bas[0] = new Bigplane(80,80,20,100,2);
-        bas[1] = new Bigplane(80,80,120,30,2);
-        bs[0] = new Bee(30,30,120,130,2,1);
-        bs[1] = new Bee(30,30,220,300,2,-1);
         bts[0] = new Bullet(8,8,220,300,2,2);
         bts[1] = new Bullet(8,8,220,200,2,2);
+        planes = new FlyingObject[6];
+        planes[0] = new Airplane(45,45,10,30,2);
+        planes[1] = new Airplane(45,45,300,30,2);
+        planes[2] = new Bigplane(80,80,20,100,2);
+        planes[3] = new Bigplane(80,80,120,30,2);
+        planes[4] = new Bee(30,30,120,130,2,1);
+        planes[5] = new Bee(30,30,220,300,2,-1);
+
     }
 
 
@@ -37,14 +38,8 @@ public class World extends JPanel{
     public void paint(Graphics g) {
         s.paintObject(g);
         h.paintObject(g);
-        for (int i = 0; i < as.length; i++) {
-            as[i].paintObject(g);
-        }
-        for (int i = 0; i < bas.length; i++) {
-            bas[i].paintObject(g);
-        }
-        for (int i = 0; i < bs.length; i++) {
-            bs[i].paintObject(g);
+        for (int i = 0; i < planes.length; i++) {
+            planes[i].paintObject(g);
         }
         for (int i = 0; i < bts.length; i++) {
             bts[i].paintObject(g);
@@ -74,14 +69,8 @@ public class World extends JPanel{
         @Override
         public void run(){
             s.move();
-            for (int i = 0; i < as.length; i++) {
-                as[i].move();
-            }
-            for (int i = 0; i < bas.length; i++) {
-                bas[i].move();
-            }
-            for (int i = 0; i < bs.length; i++) {
-                bs[i].move();
+            for (int i = 0; i < planes.length; i++) {
+                planes[i].move();
             }
             for (int i = 0; i < bts.length; i++) {
                 bts[i].move();

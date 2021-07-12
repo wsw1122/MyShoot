@@ -10,15 +10,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Sky extends FlyingObject{
-    private double speed;
     private double y1; //第二张背景的y坐标
     public Sky(double width, double height, double x, double y, double speed,double y1) {
         super(width,height,x,y);
 
         this.speed = speed;
         this.y1 = y1;
-        image = new ImageIcon("images/background.png");
-
+        image = Images.sky;
+        width = image.getIconWidth();
+        height = image.getIconHeight();
     }
     public void move() {
         y+=speed;

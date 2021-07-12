@@ -8,15 +8,15 @@ package cn.tedu.shoot;
 
 import javax.swing.*;
 
-public class Bee extends FlyingObject{
-    private double speed;
+public class Bee extends Plane{
     private int direction;
     public Bee(double width, double height, double x, double y, double speed,int direction) {
         super(width,height,x,y);
         this.speed = speed;
         this.direction = direction;
-        image = new ImageIcon("images/bee0.png");
-
+        image = Images.bee[0];
+        width = image.getIconWidth();
+        height = image.getIconHeight();
     }
     public void move() {
         y+=speed;

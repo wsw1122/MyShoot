@@ -10,13 +10,14 @@ import javax.swing.*;
 
 public class Bullet extends FlyingObject {
     private int fire; //火力值
-    private double speed;
 
     public Bullet(double width,double height,double x,double y,double speed,int fire){
         super(width,height,x,y);
         this.fire = fire;
         this.speed = speed;
-        image = new ImageIcon("images/bullet.png");
+        image = Images.bullet;
+        width = image.getIconWidth();
+        height = image.getIconHeight();
     }
     public void move() {
         y-=speed;
