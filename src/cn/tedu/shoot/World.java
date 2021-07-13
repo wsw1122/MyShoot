@@ -8,26 +8,29 @@ package cn.tedu.shoot;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 public class World extends JPanel{
     private Sky s;
     private Hero h;
     //利用数组管理能打掉的飞机类
-    private FlyingObject[] planes;
+    private Plane[] planes;
     private Bullet[] bts = new Bullet[2];
+    private int index = 0;
     public World(){
-        s =new Sky(400,700,0,0,1,-700);
-        h = new Hero(65,50,140,400,0);
-        bts[0] = new Bullet(8,8,220,300,2,2);
-        bts[1] = new Bullet(8,8,220,200,2,2);
-        planes = new FlyingObject[6];
-        planes[0] = new Airplane(45,45,10,30,2);
-        planes[1] = new Airplane(45,45,300,30,2);
-        planes[2] = new Bigplane(80,80,20,100,2);
-        planes[3] = new Bigplane(80,80,120,30,2);
-        planes[4] = new Bee(30,30,120,130,2,1);
-        planes[5] = new Bee(30,30,220,300,2,-1);
+        s =new Sky();
+        h = new Hero(140,400);
+        bts[0] = new Bullet(8,8);
+        bts[1] = new Bullet(8,8);
+        planes = new Plane[6];
+        planes[0] = new Airplane();
+        planes[1] = new Airplane();
+        planes[2] = new Bigplane();
+        planes[3] = new Bigplane();
+        planes[4] = new Bee();
+        planes[5] = new Bee();
 
     }
 
@@ -68,6 +71,8 @@ public class World extends JPanel{
         //重新定时任务run方法
         @Override
         public void run(){
+
+            createPlane();
             s.move();
             for (int i = 0; i < planes.length; i++) {
                 planes[i].move();
@@ -77,6 +82,31 @@ public class World extends JPanel{
             }
             //重新画图
             repaint();
+        }
+
+        //随机生成飞机
+        public void createPlane(){
+            //生成速度减小18倍
+            if(index%18 == 0){
+                Random random = new Random();
+                int n = random.nextInt(10);
+                Plane plane;
+                //当随机数时0~6 的时候创建 小飞机
+                if(n<=6){
+                    plane = new Airplane();
+                    //当随机数时7~8 的时候创建 大飞机
+                }else if (n<=8){
+                    plane = new Bigplane();
+                    //当随机数时9 的时候创建 小蜜蜂
+                }else {
+                    plane = new Bee();
+                }
+
+                //为数组添加敌机
+                planes = Arrays.copyOf(planes ,planes.length+1);
+                planes[planes.length-1] = plane;
+            }
+            index++;
         }
     }
 

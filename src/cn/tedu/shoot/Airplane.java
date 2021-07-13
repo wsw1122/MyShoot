@@ -9,13 +9,14 @@ package cn.tedu.shoot;
 import javax.swing.*;
 
 public class Airplane extends Plane {
-
-    public Airplane(double width, double height, double x, double y, double speed) {
-        super(width, height, x, y);
+    // 根据位置自定义出场位置
+    public Airplane( double x, double y, double speed) {
+        super(x, y,Images.airplane[0],Images.airplane,Images.bom);
         this.speed = speed;
-        image = Images.airplane[1];
-        width = image.getIconWidth();
-        height = image.getIconHeight();
     }
-
+    //调用父类随机生成的构造方法
+    public Airplane(){
+        super(Images.airplane[0],Images.airplane,Images.bom);
+        speed = Math.random()*4+1.5;
+    }
 }

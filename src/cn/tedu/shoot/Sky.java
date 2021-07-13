@@ -11,14 +11,10 @@ import java.awt.*;
 
 public class Sky extends FlyingObject{
     private double y1; //第二张背景的y坐标
-    public Sky(double width, double height, double x, double y, double speed,double y1) {
-        super(width,height,x,y);
-
-        this.speed = speed;
-        this.y1 = y1;
-        image = Images.sky;
-        width = image.getIconWidth();
-        height = image.getIconHeight();
+    public Sky() {
+        super(0,0,Images.sky,null,null);
+        this.speed = 0.8;
+        this.y1 = -height;
     }
     public void move() {
         y+=speed;

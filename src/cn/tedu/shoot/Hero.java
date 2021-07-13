@@ -10,14 +10,11 @@ import javax.swing.*;
 
 public class Hero extends FlyingObject {
 
-    private int fire; //火力值
+//    private int fire; //火力值
 
-    public Hero(double width,double height,double x,double y,int fire){
-        super(width,height,x,y);
-        this.fire = fire;
-        image = Images.hero[0];
-        width = image.getIconWidth();
-        height = image.getIconHeight();
+    public Hero(double x,double y){
+        super(x,y,Images.hero[0], Images.hero,Images.bom);
+//        this.fire = fire;
     }
     public void move() {
 

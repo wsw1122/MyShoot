@@ -10,11 +10,15 @@ import javax.swing.*;
 
 public class Bigplane extends Plane{
 
-    public Bigplane(double width, double height, double x, double y, double speed) {
-        super(width,height,x,y);
+    // 根据位置自定义出场位置
+    public Bigplane( double x, double y, double speed) {
+        super(x, y,Images.bigairplane[0],Images.bigairplane,Images.bom);
         this.speed = speed;
-        image = Images.bigairplane[0];
-        width = image.getIconWidth();
-        height = image.getIconHeight();
+    }
+
+    //调用父类随机生成的构造方法
+    public Bigplane(){
+        super(Images.bigairplane[0],Images.bigairplane,Images.bom);
+        speed = Math.random()*3+1.5;
     }
 }

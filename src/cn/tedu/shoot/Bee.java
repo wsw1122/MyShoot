@@ -9,14 +9,18 @@ package cn.tedu.shoot;
 import javax.swing.*;
 
 public class Bee extends Plane{
-    private int direction;
-    public Bee(double width, double height, double x, double y, double speed,int direction) {
-        super(width,height,x,y);
+    private double direction;
+    // 根据位置自定义出场位置
+    public Bee( double x, double y, double speed,double direction) {
+        super(x, y,Images.bee[0],Images.bee,Images.bom);
         this.speed = speed;
         this.direction = direction;
-        image = Images.bee[0];
-        width = image.getIconWidth();
-        height = image.getIconHeight();
+    }
+
+    //调用父类随机生成的构造方法
+    public Bee(){
+        super(Images.bee[0],Images.bee,Images.bom);
+        speed = Math.random()*5+1.5;
     }
     public void move() {
         y+=speed;
