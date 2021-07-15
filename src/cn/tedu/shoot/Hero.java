@@ -16,8 +16,13 @@ public class Hero extends FlyingObject {
         super(x,y,Images.hero[0], Images.hero,Images.bom);
 //        this.fire = fire;
     }
-    public void move() {
-
+    public void move() {}
+    public void move(double x,double y){
+        this.x = x;
+        this.y = y;
     }
 
+    public void fire(){
+        
+    }
 }

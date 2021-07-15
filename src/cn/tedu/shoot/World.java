@@ -8,6 +8,8 @@ package cn.tedu.shoot;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Timer;
@@ -22,8 +24,8 @@ public class World extends JPanel{
     public World(){
         s =new Sky();
         h = new Hero(140,400);
-        bts[0] = new Bullet(8,8);
-        bts[1] = new Bullet(8,8);
+        bts[0] = new Bullet(140,423);
+        bts[1] = new Bullet(140,400);
         planes = new Plane[6];
         planes[0] = new Airplane();
         planes[1] = new Airplane();
@@ -65,9 +67,22 @@ public class World extends JPanel{
         Timer timer = new Timer();  //1.创建定时器对象
         LoopTask task = new LoopTask(); //2.创建定时任务
         timer.schedule(task,1000,10); //定时任务  1内部类  2多长时间后执行 3间隔多次时间执行
+
+        //创建鼠标事件
+
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                System.out.println(e.getX());
+                double x = e.getX() - h.width/2;
+                double y = e.getY() - h.height/2;
+                h.move(x,y);
+            }
+        });
     }
 
     class LoopTask extends TimerTask{
+
         //重新定时任务run方法
         @Override
         public void run(){

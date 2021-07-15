@@ -7,20 +7,21 @@
 package cn.tedu.shoot;
 
 import javax.swing.*;
-
 public class Bee extends Plane{
-    private double direction;
+    private int direction;
     // 根据位置自定义出场位置
-    public Bee( double x, double y, double speed,double direction) {
+    public Bee( double x, double y, double speed) {
         super(x, y,Images.bee[0],Images.bee,Images.bom);
         this.speed = speed;
-        this.direction = direction;
+        this.direction = Math.random() >= 0.5 ? 1: -1;
+        System.out.println( this.direction);
     }
 
     //调用父类随机生成的构造方法
     public Bee(){
         super(Images.bee[0],Images.bee,Images.bom);
         speed = Math.random()*5+1.5;
+        this.direction = Math.random() >= 0.5 ? 1: -1;
     }
     public void move() {
         y+=speed;
@@ -28,7 +29,7 @@ public class Bee extends Plane{
         if (x<=0){
             direction = 1;
         }
-        if (x>=400){
+        if (x>=400-width){
             direction = -1;
         }
     }

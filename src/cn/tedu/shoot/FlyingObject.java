@@ -53,7 +53,6 @@ public abstract class FlyingObject {
         //  index=3 (index++)=3  3%2=1  image=images[1];
         // ...依次类推,当被除数是0,1,2,3,4..之类的周期性的正整数时
         //对%取余则余数的范围是[0,2)
-        System.out.println(index+","+(index%images.length));
         //除以20是为了++时候放慢20倍速
         image = images[(index++/20) % images.length];
     }
