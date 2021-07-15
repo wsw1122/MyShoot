@@ -33,12 +33,7 @@ public class World extends JPanel{
         planes[3] = new Bigplane();
         planes[4] = new Bee();
         planes[5] = new Bee();
-
     }
-
-
-
-
     @Override
     public void paint(Graphics g) {
         s.paintObject(g);
@@ -73,7 +68,6 @@ public class World extends JPanel{
         addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
-                System.out.println(e.getX());
                 double x = e.getX() - h.width/2;
                 double y = e.getY() - h.height/2;
                 h.move(x,y);
@@ -88,6 +82,7 @@ public class World extends JPanel{
         public void run(){
 
             createPlane();
+            fireAction();
             s.move();
             for (int i = 0; i < planes.length; i++) {
                 planes[i].move();
@@ -95,6 +90,7 @@ public class World extends JPanel{
             for (int i = 0; i < bts.length; i++) {
                 bts[i].move();
             }
+            hitDection();
             //重新画图
             repaint();
         }
@@ -123,6 +119,30 @@ public class World extends JPanel{
             }
             index++;
         }
+
+        //创建子弹
+
+        public void fireAction(){
+            if (index%16 == 0) {
+                Bullet bullet = h.fire();
+                bts = Arrays.copyOf(bts, bts.length + 1);
+                bts[bts.length - 1] = bullet;
+            }
+        }
+
+        //碰撞检查
+        public void hitDection(){
+            for (int i = 0; i < bts.length; i++) {
+                for (int j = 0; j < planes.length; j++) {
+                    if(planes[j].duang(bts[i])){
+                        System.out.println("111");
+
+
+                    }
+                }
+            }
+        }
+
     }
 
 }

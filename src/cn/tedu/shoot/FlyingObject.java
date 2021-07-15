@@ -40,6 +40,28 @@ public abstract class FlyingObject {
         nextImage();
         image.paintIcon(null,g,(int) x,(int) y);
     }
+
+
+    public boolean duang(FlyingObject bullet ){
+        //敌机
+        double r1 = Math.min(this.width,this.height)/2;
+        double x1 = this.x+this.width/2;
+        double y1 = this.y+this.height/2;
+
+        //子弹
+        double r2 = Math.min(bullet.width,bullet.height);
+        double x2 = bullet.x+bullet.width/2;
+        double y2 = bullet.y+bullet.height/2;
+
+        //勾股定理
+        double a = y2-y1;
+        double b = x2-x1;
+
+        double c = Math.sqrt(a*a+b*b);
+        return c < r1+r2;
+
+
+    }
     //定义播放动画帧
 
     public void nextImage(){

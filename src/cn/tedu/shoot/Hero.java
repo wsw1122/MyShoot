@@ -22,7 +22,10 @@ public class Hero extends FlyingObject {
         this.y = y;
     }
 
-    public void fire(){
-        
+    public Bullet fire(){
+        double x = this.x+width/2-5;
+        double y = this.y-15;
+        Bullet bullet = new Bullet(x,y);
+        return bullet;
     }
 }
