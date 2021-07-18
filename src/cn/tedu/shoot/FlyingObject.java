@@ -142,4 +142,17 @@ public abstract class FlyingObject {
     public boolean isZombie(){
         return state == ZOMBIE;
     }
+
+
+    //检查出界状态
+
+    public boolean outOfBounds(){
+        if(y<(-height-50)){
+            return true;
+        }else if(y>700+50){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

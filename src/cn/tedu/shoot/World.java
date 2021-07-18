@@ -159,7 +159,7 @@ public class World extends JPanel {
             FlyingObject[] living = new FlyingObject[planes.length];
             int index = 0;
             for (int i = 0; i < planes.length; i++) {
-                if (planes[i].isZombie()) {
+                if (planes[i].isZombie() || planes[i].outOfBounds()) {
                     continue;
                 }
                 living[index++] = planes[i];
@@ -171,7 +171,7 @@ public class World extends JPanel {
             index = 0;
             for (int i = 0; i < bts.length; i++) {
                 System.out.println(bts[i]);
-                if (bts[i].isDead()) {
+                if (bts[i].isDead() || bts[i].outOfBounds()) {
                     continue;
                 }
 
