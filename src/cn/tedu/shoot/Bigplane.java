@@ -14,11 +14,13 @@ public class Bigplane extends Plane{
     public Bigplane( double x, double y, double speed) {
         super(x, y,Images.bigairplane[0],Images.bigairplane,Images.bom);
         this.speed = speed;
+        life = 5;
     }
 
     //调用父类随机生成的构造方法
     public Bigplane(){
         super(Images.bigairplane[0],Images.bigairplane,Images.bom);
         speed = Math.random()*3+1.5;
+        life = 5;
     }
 }

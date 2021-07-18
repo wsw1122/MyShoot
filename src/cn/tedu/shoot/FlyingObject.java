@@ -8,6 +8,16 @@ package cn.tedu.shoot;
 import javax.swing.ImageIcon;
 import java.awt.Graphics;
 public abstract class FlyingObject {
+    //飞行物的三个状态
+    public static final int LIVING = 1; //活着
+    public static final int DEAD = 0;  //被击中
+    public static final int ZOMBIE = -1; //僵尸
+    //飞行物状态
+    protected int state = LIVING;
+
+    //飞行物生命值
+    protected int life = 1;
+
     protected double width; //宽
     protected double height; //高
     protected double x;
@@ -17,7 +27,7 @@ public abstract class FlyingObject {
     protected ImageIcon[] images;  //数组切换图片
     protected ImageIcon[] bom;      //数组切换爆炸图片
     protected int index = 0;
-
+    private int i=0;
     public FlyingObject(double x,double y,ImageIcon image,ImageIcon[] images,ImageIcon[] bom){
         this.x = x;
         this.y = y;
@@ -65,9 +75,26 @@ public abstract class FlyingObject {
     //定义播放动画帧
 
     public void nextImage(){
-        if (images == null) {
-            return;
+        switch (state){
+            case LIVING:
+                if (images == null) {
+                    return;
+                }
+                image = images[(index++/20) % images.length];
+                break;
+            case DEAD:
+                int index = i++ /30;
+                if (bom == null) {
+                    return;
+                }
+                if (index == bom.length){
+                    state = ZOMBIE;
+                    return;
+                }
+                image = bom[index];
+
         }
+
         // 播放小敌机  2
         //  index=0 (index++)=0  0%2=0  image=images[0];
         //  index=1 (index++)=1  1%2=1  image=images[1];
@@ -76,7 +103,43 @@ public abstract class FlyingObject {
         // ...依次类推,当被除数是0,1,2,3,4..之类的周期性的正整数时
         //对%取余则余数的范围是[0,2)
         //除以20是为了++时候放慢20倍速
-        image = images[(index++/20) % images.length];
+
     }
 
+    //击中后减少血量
+    //减少生命值 true
+    //已经死亡  false
+    public boolean hit(){
+        if (life > 0) {
+            life--;
+            if (life == 0){
+                state = DEAD;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    //设置死亡状态
+    public boolean goDead(){
+        if (state == LIVING) {
+            life = 0;
+            state = DEAD;
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean isLiving(){
+        return state == LIVING;
+    }
+
+    public boolean isDead(){
+        return state == DEAD;
+    }
+
+    public boolean isZombie(){
+        return state == ZOMBIE;
+    }
 }
