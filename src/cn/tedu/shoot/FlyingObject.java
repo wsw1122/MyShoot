@@ -43,6 +43,7 @@ public abstract class FlyingObject {
      */
 
     public FlyingObject(){};
+
     //    移动
     public abstract void move();
     //画对象
