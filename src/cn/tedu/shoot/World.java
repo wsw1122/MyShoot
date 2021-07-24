@@ -8,7 +8,7 @@ package cn.tedu.shoot;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
@@ -23,7 +23,8 @@ public class World extends JPanel {
     private FlyingObject[] planes;
     private Bullet[] bts = new Bullet[1];
     private int index = 0;
-
+    private int score = 0;
+    private int life;
     public World() {
         s = new Sky();
         h = new Hero(140, 400);
@@ -47,6 +48,13 @@ public class World extends JPanel {
         for (int i = 0; i < bts.length; i++) {
             bts[i].paintObject(g);
         }
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("宋体",Font.BOLD,20));
+        g.drawString("分数："+score ,20,40);
+        g.drawString("生命："+life ,20,60);
+
+
     }
 
     public static void main(String[] args) {
@@ -128,9 +136,13 @@ public class World extends JPanel {
 
         public void fireAction() {
             if (index % 16 == 0) {
-                Bullet bullet = h.fire();
-                bts = Arrays.copyOf(bts, bts.length + 1);
-                bts[bts.length - 1] = bullet;
+                Bullet[] double_bullet = h.openFire();
+                int len = bts.length;
+                //扩容子弹
+                Bullet[] arr = Arrays.copyOf(bts,len+double_bullet.length);
+                //合并数组
+                System.arraycopy(double_bullet,0,arr,len,double_bullet.length);
+                bts = arr;
             }
         }
 
@@ -147,11 +159,38 @@ public class World extends JPanel {
                     if (planes[j].duang(bts[i])) {
                         planes[j].hit();
                         bts[i].goDead();
-
+                        scores(planes[j]);
                     }
                 }
             }
         }
+
+        public void scores(FlyingObject plane){
+            //判断飞行物状态
+            if(plane.isDead()){
+                //判读plane是否是接口实现
+                if(plane instanceof Enemy){
+                    //向下转型
+                    Enemy enemy = (Enemy) plane;
+                    score += enemy.getScore();
+                }
+
+                //获取Bee奖品
+
+                if (plane instanceof Award){
+                    Award award = (Award) plane;
+                    int type = award.getAward();
+                    if(type == award.DOUBLE_FILE){
+                        h.doubleFire();
+                    }else if(type == Award.LIFT){
+                        life++;
+                    }
+
+                }
+            }
+
+        }
+
         //清除数组
 
         public void clean() {
@@ -194,6 +233,7 @@ public class World extends JPanel {
 
             }
         }
+
     }
 
 }

@@ -11,7 +11,7 @@ import javax.swing.*;
 public class Hero extends FlyingObject {
 
 //    private int fire; //火力值
-
+    private int doubleFire;
     public Hero(double x,double y){
         super(x,y,Images.hero[0], Images.hero,Images.bom);
 //        this.fire = fire;
@@ -25,7 +25,23 @@ public class Hero extends FlyingObject {
     public Bullet fire(){
         double x = this.x+width/2-5;
         double y = this.y-15;
-        Bullet bullet = new Bullet(x,y);
-        return bullet;
+        return new Bullet(x,y);
+    }
+    public void doubleFire(){
+        doubleFire = 20;
+    }
+    public Bullet[] openFire(){
+        if (doubleFire > 0){
+            doubleFire--;
+            double x = this.x+width/2-5;
+            double y = this.y-15;
+            Bullet b1= new Bullet(x+15,y);
+            Bullet b2= new Bullet(x-15,y);
+            return new Bullet[]{b1,b2};
+        }else {
+            Bullet b = fire();
+            return new Bullet[]{b} ;
+        }
+
     }
 }

@@ -22,20 +22,4 @@ public class Bullet extends FlyingObject {
         y-=speed;
     }
 
-    @Override
-    public String toString() {
-        return "Bullet{" +
-                "state=" + state +
-                ", life=" + life +
-                ", width=" + width +
-                ", height=" + height +
-                ", x=" + x +
-                ", y=" + y +
-                ", image=" + image +
-                ", speed=" + speed +
-                ", images=" + Arrays.toString(images) +
-                ", bom=" + Arrays.toString(bom) +
-                ", index=" + index +
-                '}';
-    }
 }

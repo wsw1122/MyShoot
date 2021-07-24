@@ -8,7 +8,7 @@ package cn.tedu.shoot;
 
 import javax.swing.*;
 
-public class Bigplane extends Plane{
+public class Bigplane extends Plane implements Enemy{
 
     // 根据位置自定义出场位置
     public Bigplane( double x, double y, double speed) {
@@ -22,5 +22,10 @@ public class Bigplane extends Plane{
         super(Images.bigairplane[0],Images.bigairplane,Images.bom);
         speed = Math.random()*3+1.5;
         life = 5;
+    }
+
+    @Override
+    public int getScore() {
+        return 20;
     }
 }

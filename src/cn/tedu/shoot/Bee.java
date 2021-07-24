@@ -7,7 +7,7 @@
 package cn.tedu.shoot;
 
 import javax.swing.*;
-public class Bee extends Plane{
+public class Bee extends Plane implements Award{
     private int direction;
     // 根据位置自定义出场位置
     public Bee( double x, double y, double speed) {
@@ -32,5 +32,10 @@ public class Bee extends Plane{
         if (x>=400-width){
             direction = -1;
         }
+    }
+
+    @Override
+    public int getAward() {
+        return Math.random() >= 0.5 ? DOUBLE_FILE: LIFT;
     }
 }
