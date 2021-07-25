@@ -14,7 +14,7 @@ public class Bee extends Plane implements Award{
         super(x, y,Images.bee[0],Images.bee,Images.bom);
         this.speed = speed;
         this.direction = Math.random() >= 0.5 ? 1: -1;
-        System.out.println( this.direction);
+//        System.out.println( this.direction);
     }
 
     //调用父类随机生成的构造方法
